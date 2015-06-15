@@ -31,11 +31,13 @@ class CompassPlugin implements Plugin<Project> {
     }
 
     project.task("compassWatchStart", type: CompassFork) {
+      group TASK_GROUP_NAME
       command "watch"
       outputs.upToDateWhen { false }
     }
 
     project.task("compassWatchStop").doLast {
+      group TASK_GROUP_NAME
       project.tasks.findByName("compassWatchStart").processHandle.abort()
     }
 
